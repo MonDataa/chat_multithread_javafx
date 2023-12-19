@@ -9,9 +9,6 @@ import java.util.stream.Collectors;
 
 public class multithreadchatserver_v2 extends Thread{
     private List<Conversation> conversationList=new ArrayList<>();
-    int clientcount;
-
-    private List<String> listclient=new ArrayList<String>();
 
     String nomclient;
     InputStream is ;
