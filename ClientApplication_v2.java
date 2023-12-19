@@ -90,6 +90,7 @@ public class ClientApplication_v2 extends Application {
                 new Thread(()->{
                             String sendname=textFieldUser.getText();
                             pw.println(sendname);
+                            System.out.println("sendname envoyer : "+sendname);
                             buttonConnecter.setVisible(false);
                             while (true) {
                                     try {
@@ -114,6 +115,7 @@ public class ClientApplication_v2 extends Application {
         buttonEnvoyer.setOnAction((evt)->{
             String message=textFieldMessage.getText();
             pw.println(message);
+            System.out.println("message envoyer : "+message);
             textFieldMessage.clear();
         });
 
@@ -121,6 +123,9 @@ public class ClientApplication_v2 extends Application {
             try {
                 socket.close();
                 bufferedReader.close();
+                pw.close();
+                inputStream.close();
+                isr.close();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

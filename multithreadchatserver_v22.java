@@ -7,19 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class multithreadchatserver_v2 extends Thread{
+public class multithreadchatserver_v22 extends Thread{
     private List<Conversation> conversationList=new ArrayList<>();
-
     String nomclient;
-    InputStream is ;
-    InputStreamReader isr;
-
-    BufferedReader br;
-    PrintWriter pw;
-
     public static void main( String[] args )
     {
-        new multithreadchatserver_v2().start();
+        new multithreadchatserver_v22().start();
 
     }
     @Override
@@ -29,15 +22,17 @@ public class multithreadchatserver_v2 extends Thread{
             ServerSocket serversocket = new ServerSocket(1234);
             while (true){
                 Socket socket = serversocket.accept();
-                System.out.println("serveur est connecter");
-                is = socket.getInputStream();
-                isr = new InputStreamReader(is);
-                br = new BufferedReader(isr);
+                InputStream is = socket.getInputStream();
+                InputStreamReader isr = new InputStreamReader(is);
+                BufferedReader br = new BufferedReader(isr);
+                OutputStream os = socket.getOutputStream();
+                PrintWriter pw = new PrintWriter(os, true);
+
                 nomclient=br.readLine();
                 System.out.println("nomclient envoyer : "+nomclient);
-                //nomclient="mounsif";
                 Conversation conversation = new Conversation(socket,nomclient);
                 conversationList.add(conversation);
+                //pw.println(conversation.nom);
                 conversation.start();
             }
         } catch (IOException e) {
@@ -47,29 +42,29 @@ public class multithreadchatserver_v2 extends Thread{
     }
     class Conversation extends Thread{
         private Socket socket;
-        private String nomclient;
-        public Conversation(Socket socket,String nomclient){
+        private String nom;
+        public Conversation(Socket socket,String nom){
             this.socket=socket;
-            this.nomclient=nomclient;
+            this.nom=nom;
         }
         @Override
         public void run(){
             try {
-                is = socket.getInputStream();
-                isr = new InputStreamReader(is);
-                br = new BufferedReader(isr);
+                InputStream is = socket.getInputStream();
+                InputStreamReader isr = new InputStreamReader(is);
+                BufferedReader br = new BufferedReader(isr);
 
                 OutputStream os = socket.getOutputStream();
-                pw = new PrintWriter(os, true);
+                PrintWriter pw = new PrintWriter(os, true);
                 /*pw.println("response");
                 pw.flush(); dans le cas de false*/
-                String name = socket.getRemoteSocketAddress().toString();
-                System.out.println("new client conn =>  name : " + nomclient + ":"+ name);
-                pw.println("welcome your name is : " + nomclient);
+                String ip = socket.getRemoteSocketAddress().toString();
+                System.out.println("new client conn => " + nom + " ip : " + ip);
+                pw.println("welcome your name is : " + nom);
                 String request;
                 while ((request = br.readLine()) != null) {
                     //String request=br.readLine();
-                    System.out.println("new request => ip =" + name + ",name :"+nomclient+",request=" + request);
+                    System.out.println("new request => ip =" + ip + "request=" + request);
                     List<String> clientsto = new ArrayList<>();
                     String message;
                     if (request.contains("=>")) {
@@ -77,9 +72,9 @@ public class multithreadchatserver_v2 extends Thread{
                         String clients = items[0];
                          message = items[1];
                         if (clients.contains(",")) {
-                            String[] clientid = clients.split(",");
-                            for (String id : clientid) {
-                                clientsto.add(id);
+                            String[] clientname = clients.split(",");
+                            for (String n : clientname) {
+                                clientsto.add(n);
                             }
                             //String client=clientid[0];
                         } else {
@@ -87,7 +82,7 @@ public class multithreadchatserver_v2 extends Thread{
                         }
                     }
                     else {
-                        clientsto=conversationList.stream().map(c->c.nomclient).collect(Collectors.toList());
+                        clientsto=conversationList.stream().map(c->c.nom).collect(Collectors.toList());
                         message=request;
                     }
                     broadcastMessage(message,this,clientsto);
@@ -103,7 +98,7 @@ public class multithreadchatserver_v2 extends Thread{
 
             try {
                 for(Conversation conversation:conversationList) {
-                    if(conversation!=from && clients.contains(conversation.nomclient)){
+                    if(conversation!=from && clients.contains(conversation.nom)){
                         Socket socket = conversation.socket;
                         OutputStream outputStream = socket.getOutputStream();
                         PrintWriter printWriter = new PrintWriter(outputStream, true);
