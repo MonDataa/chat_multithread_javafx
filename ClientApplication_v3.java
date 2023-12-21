@@ -99,24 +99,20 @@ public class ClientApplication_v3 extends Application {
                             while (true) {
                                     try {
                                         String response = bufferedReader.readLine();
-                                        System.out.println("response :"+response);
-                                        /*pw.println("envoyer le nom du client");
-                                        String response2 = bufferedReader.readLine();
-                                        System.out.println("response2 :"+response2);*/
-
-                                        /*String[] data = response.substring(1, response.length()-1).split(",");
+                                        listModel.add(response);
+                                        //listModel.set(0,response);
+                                        String[] data = response.substring(1, response.length()-1).split(",");
                                         String name_envoye = data[0];
                                         String message = data[1];
-                                        //System.out.println("affichage data :"+ Arrays.stream(data).toList());
-                                        //System.out.println("affichage data :"+ Arrays.stream(data).map(c->c).collect(Collectors.toList()));
                                         System.out.println("affichage du Nom cote client: " + name_envoye + ",et Message cote client: " + message);
 
-
                                         System.out.println("response : "+response);
-                                        System.out.println("response type : "+response.getClass());*/
+                                        System.out.println("response type : "+response.getClass());
 
                                         Platform.runLater(() -> {
-                                            listModel.add(response);
+                                                listModel.remove(response);
+                                                listModel.add(message+" ( "+name_envoye+" ) ");
+
                                         });
 
                                     } catch (Exception e) {

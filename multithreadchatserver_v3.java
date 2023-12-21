@@ -100,7 +100,7 @@ public class multithreadchatserver_v3 extends Thread{
         }
     }
     public void broadcastMessage(String message,Conversation from) throws IOException {
-            List<String> message_name=new ArrayList<String>();
+            List<Object> message_name=new ArrayList<Object>();
             Socket socket;
             OutputStream outputStream;
             PrintWriter printWriter;
@@ -112,11 +112,6 @@ public class multithreadchatserver_v3 extends Thread{
                         outputStream = socket.getOutputStream();
                         printWriter = new PrintWriter(outputStream, true);
                         printWriter.println(message);
-                /*InputStream is = socket.getInputStream();
-                InputStreamReader isr = new InputStreamReader(is);
-                BufferedReader br = new BufferedReader(isr);
-                String response = br.readLine();
-                printWriter.println(from);*/
                 System.out.println("affiche message (broadcastMessage) : " + message_name.get(1));
                 System.out.println("affiche this = from (broadcastMessage) : " + message_name.get(0));
             }
