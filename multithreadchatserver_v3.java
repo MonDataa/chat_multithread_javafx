@@ -7,12 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class multithreadchatserver_v22 extends Thread{
+public class multithreadchatserver_v3 extends Thread{
     private List<Conversation> conversationList=new ArrayList<>();
     String nomclient;
     public static void main( String[] args )
     {
-        new multithreadchatserver_v22().start();
+        new multithreadchatserver_v3().start();
 
     }
     @Override
@@ -83,9 +83,14 @@ public class multithreadchatserver_v22 extends Thread{
                     }
                     else {
                         clientsto=conversationList.stream().map(c->c.nom).collect(Collectors.toList());
-                        message=request;
+                        /*String[] data = request.substring(1, request.length() - 1).split(", ");
+                        String name_envoye = data[0];
+                        message = data[1];
+                        // Affichage des données reçues
+                        System.out.println("affichage du Nom cote serveur: " + name_envoye + ", et Message cote serveur: " + message);
+                        */message=request;
                     }
-                    broadcastMessage(message,this,clientsto);
+                    broadcastMessage(message,this);
                 }
 
             } catch (IOException e) {
@@ -94,18 +99,27 @@ public class multithreadchatserver_v22 extends Thread{
 
         }
     }
-    public void broadcastMessage(String message,Conversation from,List<String> clients) throws IOException {
-
+    public void broadcastMessage(String message,Conversation from) throws IOException {
+            List<String> message_name=new ArrayList<String>();
+            Socket socket;
+            OutputStream outputStream;
+            PrintWriter printWriter;
             try {
+                message_name.add(from.nom);
+                message_name.add(message);
                 for(Conversation conversation:conversationList) {
-                    if(conversation!=from && clients.contains(conversation.nom)){
-                        Socket socket = conversation.socket;
-                        OutputStream outputStream = socket.getOutputStream();
-                        PrintWriter printWriter = new PrintWriter(outputStream, true);
+                        socket = conversation.socket;
+                        outputStream = socket.getOutputStream();
+                        printWriter = new PrintWriter(outputStream, true);
                         printWriter.println(message);
-                    }
-
-                }
+                /*InputStream is = socket.getInputStream();
+                InputStreamReader isr = new InputStreamReader(is);
+                BufferedReader br = new BufferedReader(isr);
+                String response = br.readLine();
+                printWriter.println(from);*/
+                System.out.println("affiche message (broadcastMessage) : " + message_name.get(1));
+                System.out.println("affiche this = from (broadcastMessage) : " + message_name.get(0));
+            }
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

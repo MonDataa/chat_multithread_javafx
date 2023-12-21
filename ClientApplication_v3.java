@@ -16,15 +16,20 @@ import javafx.stage.Stage;
 
 import java.io.*;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static javafx.application.Platform.exit;
 
-public class ClientApplication_v2 extends Application {
+public class ClientApplication_v3 extends Application {
     PrintWriter pw;
     Socket socket;
     InputStream inputStream;
     InputStreamReader isr;
     BufferedReader bufferedReader;
+
     public static void main(String[] args) {
 
         launch();
@@ -86,7 +91,6 @@ public class ClientApplication_v2 extends Application {
                 pw=new PrintWriter(socket.getOutputStream(),true);
 
 
-
                 new Thread(()->{
                             String sendname=textFieldUser.getText();
                             pw.println(sendname);
@@ -95,12 +99,28 @@ public class ClientApplication_v2 extends Application {
                             while (true) {
                                     try {
                                         String response = bufferedReader.readLine();
-                                        Platform.runLater(()->{
+                                        System.out.println("response :"+response);
+                                        /*pw.println("envoyer le nom du client");
+                                        String response2 = bufferedReader.readLine();
+                                        System.out.println("response2 :"+response2);*/
+
+                                        /*String[] data = response.substring(1, response.length()-1).split(",");
+                                        String name_envoye = data[0];
+                                        String message = data[1];
+                                        //System.out.println("affichage data :"+ Arrays.stream(data).toList());
+                                        //System.out.println("affichage data :"+ Arrays.stream(data).map(c->c).collect(Collectors.toList()));
+                                        System.out.println("affichage du Nom cote client: " + name_envoye + ",et Message cote client: " + message);
+
+
+                                        System.out.println("response : "+response);
+                                        System.out.println("response type : "+response.getClass());*/
+
+                                        Platform.runLater(() -> {
                                             listModel.add(response);
                                         });
 
-                                    }catch (IOException e) {
-                                        throw new RuntimeException(e);
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
                                     }
                             }
 
@@ -113,9 +133,18 @@ public class ClientApplication_v2 extends Application {
         });
 
         buttonEnvoyer.setOnAction((evt)->{
+            List<String> message_name=new ArrayList<>();
+            String name=textFieldUser.getText();
             String message=textFieldMessage.getText();
-            pw.println(message);
+            message_name.add(name);
+            message_name.add(message);
+            System.out.println("arraylist  message_name contient le nom : "+message_name.get(0)+" et le message "+message_name.get(1));
+            /*new Thread(()->{
+                pw.println(name);
+            }).start();*/
+            pw.println(message_name);
             System.out.println("message envoyer : "+message);
+            System.out.println("nom qui a envoyer : "+name);
             textFieldMessage.clear();
         });
 
