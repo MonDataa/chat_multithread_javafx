@@ -40,6 +40,48 @@ Ce projet est une application de chat implémentée en Java, utilisant JavaFX po
 4. **Gestion des Conversations**
    - Le serveur traite chaque conversation dans un thread distinct.
 
+
+## Serveur de Chat Multithread - multithreadchatserver_v3.java
+
+Ce document fournit un aperçu détaillé de la classe `multithreadchatserver_v3.java`, qui est au cœur du serveur de notre application de chat.
+
+### Importations Clés
+
+- `java.io.*`: Utilisé pour les entrées/sorties, notamment la lecture et l'écriture de flux de données.
+- `java.net.ServerSocket`: Permet au serveur d'écouter les connexions entrantes.
+- `java.net.Socket`: Représente une connexion de socket avec un client.
+- `java.util.List` et `java.util.ArrayList`: Utilisés pour gérer les collections d'objets, en particulier les conversations actives.
+
+### Attributs Principaux
+
+- `conversationList`: Gère les instances actives des conversations avec les clients.
+- `nomclient`: Stocke le nom associé à chaque client connecté pour une gestion personnalisée.
+
+### Méthodes Principales
+
+- `main()`: Le point d'entrée pour démarrer le serveur. Initialise et démarre une instance de `multithreadchatserver_v3`.
+- `run()`: Définit la logique du thread du serveur, en charge d'initialiser `ServerSocket` et de gérer les connexions entrantes.
+
+### Classes Associées
+
+- `Conversation` (ou `ClientHandler`): Gère la communication bidirectionnelle avec le client.
+- `ServerSocket`: Attend les connexions entrantes et crée un nouveau `Socket` pour chaque client.
+- `Socket`: Facilite la communication réseau entre le serveur et le client.
+
+### Logique de la Classe Serveur
+
+1. **Initialisation**: Le serveur démarre et initialise le `ServerSocket` sur un port spécifié.
+2. **Attente des Clients**: Une boucle infinie écoute les tentatives de connexion des clients.
+3. **Gestion des Connexions**: À chaque connexion réussie, un nouveau `Socket` est créé pour le client.
+4. **Thread de Conversation**: Un nouveau thread est démarré pour chaque `Socket` client via une instance de la classe de gestion de conversation.
+5. **Ajout à la Liste de Conversations**: Chaque nouvelle conversation est ajoutée à `conversationList`.
+6. **Communication**: Les messages entrants sont lus et distribués aux autres clients, permettant un chat de groupe.
+
+### Conclusion
+
+Chaque composant a un rôle spécifique dans la gestion des connexions réseau et la facilitation de la communication entre le serveur et les clients. Une analyse complète du code source est nécessaire pour une compréhension approfondie des classes impliquées.
+
+
 ## Captures d'écran
 
 Voici un aperçu de l'application de chat en action:
