@@ -45,7 +45,7 @@ Ce projet est une application de chat implémentée en Java, utilisant JavaFX po
 <<<<<<< HEAD
 Voici un aperçu de l'application de chat en action:
 
-![Capture d'écran de l'Application de Chat](C:\Users\ASUS\Documents\Programme\M1TNSID\s7\Architecture\java\td\chat_multithread_javafx\client_chat_screen_shot.png)
+![Capture d'écran de l'Application de Chat](https://github.com/MonDataa/chat_multithread_javafx/blob/main/client_chat_screen_shot.png)
 =======
 Pour voir l'application en action, exécutez l'application sur votre système et prenez des captures d'écran de l'interface utilisateur du client et de la console du serveur.
 
