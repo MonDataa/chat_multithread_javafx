@@ -54,14 +54,7 @@ Ce projet est une application de chat implémentée en Java, utilisant JavaFX po
 
 ## Serveur de Chat Multithread - multithreadchatserver_v3.java
 
-Ce document fournit un aperçu détaillé de la classe `multithreadchatserver_v3.java`, qui est au cœur du serveur de notre application de chat.
-
-### Importations Clés
-
-- `java.io.*`: Utilisé pour les entrées/sorties, notamment la lecture et l'écriture de flux de données.
-- `java.net.ServerSocket`: Permet au serveur d'écouter les connexions entrantes.
-- `java.net.Socket`: Représente une connexion de socket avec un client.
-- `java.util.List` et `java.util.ArrayList`: Utilisés pour gérer les collections d'objets, en particulier les conversations actives.
+Cette partie donne un aperçu détaillé de la classe `multithreadchatserver_v3.java`, qui est au cœur du serveur de notre application de chat.
 
 ### Attributs Principaux
 
