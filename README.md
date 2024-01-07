@@ -23,7 +23,7 @@ Ce projet est une application de chat implémentée en Java, utilisant JavaFX po
 - Utilise `Platform.runLater` pour les mises à jour de l'interface utilisateur depuis des threads non-JavaFX.
 - Garantit que les modifications de l'interface utilisateur sont sûres pour les threads.
 
-#### Classe `ClientSocketHandler`
+#### Classe ClientSocketHandler
 - Encapsule la gestion de la connexion réseau, l'envoi et la réception des messages.
 
 ### multithreadchatserver_v3.java (Serveur Chat)
