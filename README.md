@@ -88,9 +88,6 @@ Ce document fournit un aperçu détaillé de la classe `multithreadchatserver_v3
 5. **Ajout à la Liste de Conversations**: Chaque nouvelle conversation est ajoutée à `conversationList`.
 6. **Communication**: Les messages entrants sont lus et distribués aux autres clients, permettant un chat de groupe.
 
-### Conclusion
-
-Chaque composant a un rôle spécifique dans la gestion des connexions réseau et la facilitation de la communication entre le serveur et les clients. Une analyse complète du code source est nécessaire pour une compréhension approfondie des classes impliquées.
 
 ## Captures d'écran
 
