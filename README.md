@@ -15,6 +15,17 @@ Ce projet est une application de chat implémentée en Java, utilisant JavaFX po
 - Gère une `Stage` (fenêtre) avec des éléments d'interface utilisateur.
 - Gère les interactions utilisateur.
 
+#### Connexion Réseau
+- Gère la connexion au serveur de chat via des sockets.
+- Envoie et reçoit des messages du serveur de chat.
+
+#### Mise à Jour de l'Interface Utilisateur
+- Utilise `Platform.runLater` pour les mises à jour de l'interface utilisateur depuis des threads non-JavaFX.
+- Garantit que les modifications de l'interface utilisateur sont sûres pour les threads.
+
+#### Classe `ClientSocketHandler`
+- Encapsule la gestion de la connexion réseau, l'envoi et la réception des messages.
+
 ### multithreadchatserver_v3.java (Serveur Chat)
 
 #### Importations
@@ -80,7 +91,6 @@ Ce document fournit un aperçu détaillé de la classe `multithreadchatserver_v3
 ### Conclusion
 
 Chaque composant a un rôle spécifique dans la gestion des connexions réseau et la facilitation de la communication entre le serveur et les clients. Une analyse complète du code source est nécessaire pour une compréhension approfondie des classes impliquées.
-
 
 ## Captures d'écran
 
