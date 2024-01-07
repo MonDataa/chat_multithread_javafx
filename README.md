@@ -95,4 +95,4 @@ Voici un aperçu de l'application de chat en action:
 
 ![Capture d'écran de l'Application de Chat](https://github.com/MonDataa/chat_multithread_javafx/blob/main/client_chat_screen_shot.png)
 =======
-Pour voir l'application en action, exécutez l'application sur votre système et prenez des captures d'écran de l'interface utilisateur du client et de la console du serveur (`IntelliJ IDEA`).
+Pour voir l'application en action, exécutez l'application sur votre système (`IntelliJ IDEA`).
